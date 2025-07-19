@@ -1,21 +1,52 @@
--- Click to visually update the name after a 20-second countdown
-button.MouseButton1Click:Connect(function()
-	local tool = getEquippedPetTool()
-	if tool then
-		-- Countdown before changing age
-		for i = 20, 1, -1 do
-			button.Text = "Changing Age in " .. i .. "..."
-			wait(1)
-		end
+local machine = findMachine()
+if not machine or not machine:FindFirstChildWhichIsA("BasePart") then
+	warn("Pet Mutation Machine not found.")
+	return
+end
 
-		-- Change name visually
-		local newName = tool.Name:gsub("%[Age%s%d+%]", "[Age 50]")
-		tool.Name = newName
-		petInfo.Text = "Equipped Pet: " .. tool.Name
-		button.Text = "Set Age to 50"
-	else
-		button.Text = "No Pet Equipped!"
-		wait(2)
-		button.Text = "Set Age to 50"
+local basePart = machine:FindFirstChildWhichIsA("BasePart")
+
+local espGui = Instance.new("BillboardGui", basePart)
+espGui.Name = "MutationESP"
+espGui.Adornee = basePart
+espGui.Size = UDim2.new(0, 200, 0, 40)
+espGui.StudsOffset = Vector3.new(0, 3, 0)
+espGui.AlwaysOnTop = true
+
+local espLabel = Instance.new("TextLabel", espGui)
+espLabel.Size = UDim2.new(1, 0, 1, 0)
+espLabel.BackgroundTransparency = 1
+espLabel.Font = Enum.Font.GothamBold
+espLabel.TextSize = 24
+espLabel.TextStrokeTransparency = 0.3
+espLabel.TextStrokeColor3 = Color3.new(0, 0, 0)
+espLabel.Text = currentMutation
+
+local hue = 0
+RunService.RenderStepped:Connect(function()
+	if espVisible then
+		hue = (hue + 0.01) % 1
+		espLabel.TextColor3 = Color3.fromHSV(hue, 1, 1)
 	end
+end)
+
+local function animateMutationReroll()
+	reroll.Text = "⏳ Rerolling..."
+	local duration = 2
+	local interval = 0.1
+	for i = 1, math.floor(duration / interval) do
+		espLabel.Text = mutations[math.random(#mutations)]
+		wait(interval)
+	end
+	currentMutation = mutations[math.random(#mutations)]
+	espLabel.Text = currentMutation
+	reroll.Text = "Reroll Mutation"
+end
+
+toggle.MouseButton1Click:Connect(function()
+	espVisible = not espVisible
+	espGui.Enabled = espVisible
+end)
+
+reroll.MouseButton1Click:Connect(animateMutationReroll)
 end)
