@@ -2,7 +2,7 @@ local loadPetBtn = Instance.new("TextButton", frame)
 loadPetBtn.Size = UDim2.new(1, -20, 0, 30)
 loadPetBtn.Position = UDim2.new(0, 10, 1, -75)
 loadPetBtn.BackgroundColor3 = Color3.fromRGB(100, 90, 200)
-loadPetBtn.Text = "🧬 Pet Mutation Esp Script"
+loadPetBtn.Text = "ð§¬ Pet Mutation Esp Script"
 loadPetBtn.TextSize = 16
 loadPetBtn.Font = Enum.Font.FredokaOne
 loadPetBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -43,7 +43,7 @@ Instance.new("UIStroke", frame).Color = Color3.fromRGB(100, 100, 110)
 
 local title = Instance.new("TextLabel", frame)
 title.Size = UDim2.new(1, 0, 0, 35)
-title.Text = "🔍 Pet Mutation Finder 🧬"
+title.Text = "ð Pet Mutation Finder ð§¬"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.BackgroundTransparency = 1
 title.Font = Enum.Font.GothamBold
@@ -76,8 +76,8 @@ local function createButton(text, yPos, color)
 	return btn
 end
 
-local reroll = createButton("🔃 Reroll Mutation", 45, Color3.fromRGB(140, 200, 255))
-local toggle = createButton("🔍 Toggle Mutation Esp", 90, Color3.fromRGB(180, 255, 180))
+local reroll = createButton("ð Reroll Mutation", 45, Color3.fromRGB(140, 200, 255))
+local toggle = createButton("ð Toggle Mutation Esp", 90, Color3.fromRGB(180, 255, 180))
 
 local credit = Instance.new("TextLabel", frame)
 credit.Size = UDim2.new(1, 0, 0, 20)
@@ -129,7 +129,7 @@ RunService.RenderStepped:Connect(function()
 end)
 
 local function animateMutationReroll()
-	reroll.Text = "⏳ Rerolling..."
+	reroll.Text = "â³ Rerolling..."
 	local duration = 2
 	local interval = 0.1
 	for i = 1, math.floor(duration / interval) do
