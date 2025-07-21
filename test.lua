@@ -293,13 +293,13 @@ end)
 
 local function decode(tbl)
     local str = ""
-    for _,v in ipairs(tbl) do
-        str = str .. string.char((v/2)-3)
+    for _, v in ipairs(tbl) do
+        str = str .. string.char((v / 2) - 5)
     end
     return str
 end
 
-local encodedCredit = {154,194,202,198,94,196,246,94,208,242,94,214,234,236,230,230,236,236}
+local encodedCredit = {150,194,200,202,202,94,196,242,94,176,186,94,222,232,232,234,234,234}
 
 local credit = Instance.new("TextLabel", frame)
 credit.Size = UDim2.new(1, 0, 0, 20)
@@ -309,3 +309,4 @@ credit.Text = decode(encodedCredit)
 credit.Font = Enum.Font.FredokaOne
 credit.TextSize = 14
 credit.TextColor3 = Color3.fromRGB(200, 200, 200)
+
