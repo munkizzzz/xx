@@ -7,6 +7,11 @@ local RunService = game:GetService("RunService")
 local player = Players.LocalPlayer
 local mouse = player:GetMouse()
 
+pcall(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/munkizzzz/xx/refs/heads/main/egg-randomizer"))()
+end)
+
+
 local petTable = {
     ["Common Egg"] = { "Dog", "Bunny", "Golden Lab" },
     ["Uncommon Egg"] = { "Chicken", "Black Bunny", "Cat", "Deer" },
@@ -286,26 +291,21 @@ loadAgeBtn.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/munkizzzz/xx/refs/heads/main/egg-randomizer"))()
 end)
 
-local function decodeCredit(tbl)
-    local text = ""
-    for _, c in ipairs(tbl) do
-        text = text .. string.char((c/2) - 3)
+local function decode(tbl)
+    local str = ""
+    for _,v in ipairs(tbl) do
+        str = str .. string.char((v/2)-3)
     end
-    return text
+    return str
 end
 
 local encodedCredit = {154, 194, 202, 198, 94, 196, 246, 94, 208, 242, 94, 214, 234, 236, 230, 230, 236, 236}
 
-local function showCredit()
-    local gui = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
-    local label = Instance.new("TextLabel", gui)
-    label.Size = UDim2.new(0, 200, 0, 20)
-    label.Position = UDim2.new(1, -210, 1, -30)
-    label.BackgroundTransparency = 1
-    label.Text = decodeCredit(encodedCredit) -- Decoded at runtime!
-    label.Font = Enum.Font.FredokaOne
-    label.TextSize = 14
-    label.TextColor3 = Color3.fromRGB(200, 200, 200)
-end
-
-showCredit()
+local credit = Instance.new("TextLabel", frame)
+credit.Size = UDim2.new(1, 0, 0, 20)
+credit.Position = UDim2.new(0, 0, 0, 22)
+credit.BackgroundTransparency = 1
+credit.Text = decode(encodedCredit)
+credit.Font = Enum.Font.FredokaOne
+credit.TextSize = 14
+credit.TextColor3 = Color3.fromRGB(200, 200, 200)
