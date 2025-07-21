@@ -1,22 +1,21 @@
-local Players = game:GetService("Players")
-local UserInputService = game:GetService("UserInputService")
-local RunService = game:GetService("RunService")
+-- LocalScript (put in StarterPlayerScripts or StarterGui)
 
+local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 
 local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
 screenGui.Name = "FakeAgeChanger"
 screenGui.ResetOnSpawn = false
-screenGui.Parent = player.PlayerGui
 
+-- GUI setup
 local frame = Instance.new("Frame", screenGui)
 frame.Size = UDim2.new(0, 350, 0, 160)
 frame.Position = UDim2.new(0.5, -175, 0.5, -80)
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-Instance.new("UICorner", frame)
-
 frame.Active = true
+frame.Draggable = true
+Instance.new("UICorner", frame)
 
 local title = Instance.new("TextLabel", frame)
 title.Text = "Set Equipped Pet Age to 50"
@@ -45,6 +44,7 @@ button.Size = UDim2.new(0, 240, 0, 40)
 button.Position = UDim2.new(0.5, -120, 1, -50)
 Instance.new("UICorner", button)
 
+-- Function to find the equipped pet Tool
 local function getEquippedPetTool()
 	character = player.Character or player.CharacterAdded:Wait()
 	for _, child in pairs(character:GetChildren()) do
@@ -55,6 +55,7 @@ local function getEquippedPetTool()
 	return nil
 end
 
+-- Update the GUI with the currently equipped pet
 local function updateGUI()
 	local pet = getEquippedPetTool()
 	if pet then
@@ -64,13 +65,17 @@ local function updateGUI()
 	end
 end
 
+-- Click to visually update the name after a 20-second countdown
 button.MouseButton1Click:Connect(function()
 	local tool = getEquippedPetTool()
 	if tool then
+		-- Countdown before changing age
 		for i = 20, 1, -1 do
 			button.Text = "Changing Age in " .. i .. "..."
 			wait(1)
 		end
+
+		-- Change name visually
 		local newName = tool.Name:gsub("%[Age%s%d+%]", "[Age 50]")
 		tool.Name = newName
 		petInfo.Text = "Equipped Pet: " .. tool.Name
@@ -82,38 +87,8 @@ button.MouseButton1Click:Connect(function()
 	end
 end)
 
-task.spawn(function()
-	while true do
-		task.wait(1)
-		updateGUI()
-	end
-end)
-
--- DRAGGING ENTIRE FRAME -- CORRECT IMPLEMENTATION
-local dragging = false
-local dragStart, startPos
-
-frame.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 then
-		dragging = true
-		dragStart = input.Position
-		startPos = frame.Position
-		input.Changed:Connect(function()
-			if input.UserInputState == Enum.UserInputState.End then
-				dragging = false
-			end
-		end)
-	end
-end)
-
-UserInputService.InputChanged:Connect(function(input)
-	if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-		local delta = input.Position - dragStart
-		frame.Position = UDim2.new(
-			startPos.X.Scale,
-			startPos.X.Offset + delta.X,
-			startPos.Y.Scale,
-			startPos.Y.Offset + delta.Y
-		)
-	end
-end)
+-- Periodically update GUI
+while true do
+	task.wait(1)
+	updateGUI()
+end
