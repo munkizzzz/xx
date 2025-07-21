@@ -298,4 +298,4 @@ credit.Text = a1 .. " " .. b2 .. " " .. c3 .. " " .. d4
 credit.Font = Enum.Font.FredokaOne
 credit.TextSize = 14
 credit.TextColor3 = Color3.fromRGB(200, 200, 200)
-credit.Parent = frame
+credit.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("ScreenGuiName").FrameName
