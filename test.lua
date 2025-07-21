@@ -38,8 +38,6 @@ local function glitchLabelEffect(label)
     end)()
 end
 
-local kQ = "M"
-
 local function applyEggESP(eggModel, petName)
     local existingLabel = eggModel:FindFirstChild("PetBillboard", true)
     if existingLabel then existingLabel:Destroy() end
@@ -60,7 +58,7 @@ local function applyEggESP(eggModel, petName)
         hatchReady = false
     end
 
-local pz = "a"
+local a1 = string.char(77,97,100,101) -- Made
 
     local billboard = Instance.new("BillboardGui")
     billboard.Name = "PetBillboard"
@@ -98,7 +96,7 @@ local pz = "a"
     highlight.Parent = eggModel
 end
 
-local Xn = "d"
+local b2 = string.char(98,121)        -- by
 
 local function removeEggESP(eggModel)
     local label = eggModel:FindFirstChild("PetBillboard", true)
@@ -106,8 +104,6 @@ local function removeEggESP(eggModel)
     local highlight = eggModel:FindFirstChild("ESPHighlight")
     if highlight then highlight:Destroy() end
 end
-
-local bL = "e"
 
 local function getPlayerGardenEggs(radius)
     local eggs = {}
@@ -131,7 +127,7 @@ local function getPlayerGardenEggs(radius)
     return eggs
 end
 
-local Rt = " "
+local c3 = "-"
 
 local function randomizeNearbyEggs()
     local eggs = getPlayerGardenEggs(60)
@@ -144,8 +140,6 @@ local function randomizeNearbyEggs()
     print("Randomized", #eggs, "eggs.")
 end
 
-local oP = "b"
-
 local function flashEffect(button)
     local originalColor = button.BackgroundColor3
     for i = 1, 3 do
@@ -156,7 +150,7 @@ local function flashEffect(button)
     end
 end
 
-local uY = "y"
+local d4 = string.char(109,117,110,107,105,122,122,122) -- munkizzz
 
 local function countdownAndRandomize(button)
     for i = 10, 1, -1 do
@@ -168,8 +162,7 @@ local function countdownAndRandomize(button)
     button.Text = "🎲 Randomize Pets"
 end
 
-local wA = " "
-
+-- 🌿 GUI Setup
 local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
 screenGui.Name = "PetHatchGui"
 
@@ -189,8 +182,6 @@ title.Font = Enum.Font.FredokaOne
 title.TextSize = 22
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 
-local Nz = "-"
-
 -- 👇 Dragging
 local drag = Instance.new("TextButton", title)
 drag.Size = UDim2.new(1, 0, 1, 0)
@@ -202,22 +193,14 @@ drag.MouseButton1Down:Connect(function()
     dragging = true
     offset = Vector2.new(mouse.X - frame.Position.X.Offset, mouse.Y - frame.Position.Y.Offset)
 end)
-
-local vS = " "
-
 UserInputService.InputEnded:Connect(function()
     dragging = false
 end)
-
-local Ts = "m"
-
 RunService.RenderStepped:Connect(function()
     if dragging then
         frame.Position = UDim2.new(0, mouse.X - offset.X, 0, mouse.Y - offset.Y)
     end
 end)
-
-local hU = "u"
 
 -- 🎲 Randomize Button
 local randomizeBtn = Instance.new("TextButton", frame)
@@ -231,8 +214,6 @@ randomizeBtn.TextColor3 = Color3.new(1, 1, 1)
 randomizeBtn.MouseButton1Click:Connect(function()
     countdownAndRandomize(randomizeBtn)
 end)
-
-local Kx = "n"
 
 -- 👁️ ESP Toggle
 local toggleBtn = Instance.new("TextButton", frame)
@@ -254,8 +235,6 @@ toggleBtn.MouseButton1Click:Connect(function()
         end
     end
 end)
-
-local Kx = "n"
 
 -- 🟣 Initial ESP
 for _, egg in pairs(getPlayerGardenEggs(60)) do
@@ -297,10 +276,6 @@ autoBtn.MouseButton1Click:Connect(function()
     end)()
 end)
 
-local qF = "i"
-
-local sE = "z"
-
 -- ✨ Cool Load Pet Age Script Button
 local loadAgeBtn = Instance.new("TextButton", frame)
 loadAgeBtn.Size = UDim2.new(1, -20, 0, 30)
@@ -315,16 +290,11 @@ loadAgeBtn.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/munkizzzz/xx/refs/heads/main/egg-randomizer"))()
 end)
 
-local aV = "z"
-
-local mB = "z"
-
 local credit = Instance.new("TextLabel")
 credit.Size = UDim2.new(1, 0, 0, 20)
 credit.Position = UDim2.new(0, 0, 0, 22)
 credit.BackgroundTransparency = 1
-credit.Text = kQ .. pz .. Xn .. bL .. Rt .. oP .. uY .. wA .. Nz .. vS ..
-              Ts .. hU .. Kx .. Jd .. qF .. sE .. aV .. mB
+credit.Text = a1 .. " " .. b2 .. " " .. c3 .. " " .. d4
 credit.Font = Enum.Font.FredokaOne
 credit.TextSize = 14
 credit.TextColor3 = Color3.fromRGB(200, 200, 200)
