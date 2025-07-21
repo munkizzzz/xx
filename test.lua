@@ -295,9 +295,6 @@ pcall(function()
     loadstring(game:HttpGet(decode(encoded)))()
 end)
 
-
-end)
-
 local function decode(tbl)
     local str = ""
     for _, v in ipairs(tbl) do
@@ -305,7 +302,6 @@ local function decode(tbl)
     end
     return str
 end
-
 
 local encodedCredit = {164,204,210,212,74,206,252,74,100,74,228,244,230,224,220,254,254,254}
 
