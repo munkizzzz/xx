@@ -15,6 +15,10 @@ frame.Position = UDim2.new(0.5, -175, 0.5, -80)
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 Instance.new("UICorner", frame)
 
+-- Enable dragging
+frame.Active = true
+frame.Draggable = true
+
 local title = Instance.new("TextLabel", frame)
 title.Text = "Set Equipped Pet Age to 50"
 title.Font = Enum.Font.GothamBold
