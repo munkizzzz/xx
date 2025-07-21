@@ -1,6 +1,9 @@
 -- LocalScript (put in StarterPlayerScripts or StarterGui)
 
 local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 
@@ -16,47 +19,6 @@ frame.Position = UDim2.new(0.5, -175, 0.5, -80)
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 Instance.new("UICorner", frame)
 
--- Custom Dragging System
-local UIS = game:GetService("UserInputService")
-local dragging, dragInput, dragStart, startPos
-
-local function update(input)
-	local delta = input.Position - dragStart
-	frame.Position = UDim2.new(
-		startPos.X.Scale,
-		startPos.X.Offset + delta.X,
-		startPos.Y.Scale,
-		startPos.Y.Offset + delta.Y
-	)
-end
-
-frame.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 then
-		dragging = true
-		dragStart = input.Position
-		startPos = frame.Position
-
-		input.Changed:Connect(function()
-			if input.UserInputState == Enum.UserInputState.End then
-				dragging = false
-			end
-		end)
-	end
-end)
-
-frame.InputChanged:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseMovement then
-		dragInput = input
-	end
-end)
-
-UIS.InputChanged:Connect(function(input)
-	if input == dragInput and dragging then
-		update(input)
-	end
-end)
-
--- Title
 local title = Instance.new("TextLabel", frame)
 title.Text = "Set Equipped Pet Age to 50"
 title.Font = Enum.Font.GothamBold
@@ -84,6 +46,7 @@ button.Size = UDim2.new(0, 240, 0, 40)
 button.Position = UDim2.new(0.5, -120, 1, -50)
 Instance.new("UICorner", button)
 
+-- Function to find the equipped pet Tool
 local function getEquippedPetTool()
 	character = player.Character or player.CharacterAdded:Wait()
 	for _, child in pairs(character:GetChildren()) do
@@ -94,6 +57,7 @@ local function getEquippedPetTool()
 	return nil
 end
 
+-- Update the GUI with the currently equipped pet
 local function updateGUI()
 	local pet = getEquippedPetTool()
 	if pet then
@@ -121,7 +85,38 @@ button.MouseButton1Click:Connect(function()
 	end
 end)
 
-while true do
-	task.wait(1)
-	updateGUI()
-end
+-- Periodically update GUI
+task.spawn(function()
+	while true do
+		task.wait(1)
+		updateGUI()
+	end
+end)
+
+-- DRAGGING FUNCTIONALITY
+local drag = Instance.new("TextButton", title)
+drag.Size = UDim2.new(1, 0, 1, 0)
+drag.Text = ""
+drag.BackgroundTransparency = 1
+
+local dragging = false
+local offset
+
+drag.MouseButton1Down:Connect(function()
+	dragging = true
+	local mousePos = UserInputService:GetMouseLocation()
+	offset = Vector2.new(mousePos.X - frame.AbsolutePosition.X, mousePos.Y - frame.AbsolutePosition.Y)
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = false
+	end
+end)
+
+RunService.RenderStepped:Connect(function()
+	if dragging then
+		local mousePos = UserInputService:GetMouseLocation()
+		frame.Position = UDim2.new(0, mousePos.X - offset.X, 0, mousePos.Y - offset.Y)
+	end
+end)
