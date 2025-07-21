@@ -16,15 +16,15 @@ frame.Position = UDim2.new(0.5, -175, 0.5, -80)
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 Instance.new("UICorner", frame)
 
-frame.Active = true -- Required for dragging input
-
 local title = Instance.new("TextLabel", frame)
 title.Text = "Set Equipped Pet Age to 50"
 title.Font = Enum.Font.GothamBold
 title.TextSize = 22
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
-title.BackgroundTransparency = 1
+title.BackgroundTransparency = 0
+title.BackgroundColor3 = Color3.fromRGB(30,30,30)
 title.Size = UDim2.new(1, 0, 0, 40)
+title.Active = true
 
 local petInfo = Instance.new("TextLabel", frame)
 petInfo.Text = "Equipped Pet: [None]"
@@ -89,11 +89,10 @@ task.spawn(function()
 	end
 end)
 
--- DRAGGING ENTIRE FRAME
-local dragging = false
-local dragStart, startPos
+-- DRAG SYSTEM ONLY ON TITLE
+local dragging, dragStart, startPos
 
-frame.InputBegan:Connect(function(input)
+title.InputBegan:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseButton1 then
 		dragging = true
 		dragStart = input.Position
@@ -107,7 +106,7 @@ frame.InputBegan:Connect(function(input)
 	end
 end)
 
-frame.InputChanged:Connect(function(input)
+title.InputChanged:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseMovement then
 		RunService.RenderStepped:Connect(function()
 			if dragging then
