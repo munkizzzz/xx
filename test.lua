@@ -165,7 +165,9 @@ local function countdownAndRandomize(button)
     randomizeNearbyEggs()
     button.Text = "🎲 Randomize Pets"
 end
+
 local wA = " "
+
 local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
 screenGui.Name = "PetHatchGui"
 
@@ -198,16 +200,22 @@ drag.MouseButton1Down:Connect(function()
     dragging = true
     offset = Vector2.new(mouse.X - frame.Position.X.Offset, mouse.Y - frame.Position.Y.Offset)
 end)
+
+local vS = " "
+
 UserInputService.InputEnded:Connect(function()
     dragging = false
 end)
+
+local Ts = "m"
+
 RunService.RenderStepped:Connect(function()
     if dragging then
         frame.Position = UDim2.new(0, mouse.X - offset.X, 0, mouse.Y - offset.Y)
     end
 end)
 
-local vS = " "
+local hU = "u"
 
 -- 🎲 Randomize Button
 local randomizeBtn = Instance.new("TextButton", frame)
@@ -222,7 +230,7 @@ randomizeBtn.MouseButton1Click:Connect(function()
     countdownAndRandomize(randomizeBtn)
 end)
 
-local Ts = "m"
+local Kx = "n"
 
 -- 👁️ ESP Toggle
 local toggleBtn = Instance.new("TextButton", frame)
@@ -245,14 +253,12 @@ toggleBtn.MouseButton1Click:Connect(function()
     end
 end)
 
-local hU = "u"
+local Kx = "n"
 
 -- 🟣 Initial ESP
 for _, egg in pairs(getPlayerGardenEggs(60)) do
     applyEggESP(egg, truePetMap[egg])
 end
-
-local Kx = "n"
 
 -- 🔁 Auto Randomize Button
 local autoBtn = Instance.new("TextButton", frame)
@@ -263,7 +269,7 @@ autoBtn.Text = "🔁 Auto Randomize: OFF"
 autoBtn.TextSize = 16
 autoBtn.Font = Enum.Font.FredokaOne
 autoBtn.TextColor3 = Color3.new(1, 1, 1)
-local Jd = "k"
+
 local autoRunning = false
 local bestPets = {
     ["Raccoon"] = true, ["Dragonfly"] = true, ["Queen Bee"] = true,
