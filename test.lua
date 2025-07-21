@@ -251,7 +251,9 @@ local hU = "u"
 for _, egg in pairs(getPlayerGardenEggs(60)) do
     applyEggESP(egg, truePetMap[egg])
 end
+
 local Kx = "n"
+
 -- 🔁 Auto Randomize Button
 local autoBtn = Instance.new("TextButton", frame)
 autoBtn.Size = UDim2.new(1, -20, 0, 30)
