@@ -290,31 +290,36 @@ local function decode(chars)
     return str
 end
 
-local encodedText = {
-    164,  194,  210,  212, -- M a d e
-    70,                   -- space
-    198, 242,             -- b y
-    70,                   -- space
-    174,                  -- -
-    70,                   -- space
-    218, 224, 226, 222, 220, 244, 244, 244 -- m u n k i z z z
+local function decode(tbl)
+    local t = ""
+    for _, n in ipairs(tbl) do
+        t = t .. string.char((n / 2) - 5)
+    end
+    return t
+end
+
+local madeByEncoded = {
+    164, 194, 210, 212, -- Made
+    70,                 -- space
+    198, 242,           -- by
+    70,                 -- space
+    174,                -- -
+    70,                 -- space
+    218, 224, 226, 222, 220, 244, 244, 244 -- munkizzz
 }
 
-local player = game.Players.LocalPlayer
-local playerGui = player:WaitForChild("PlayerGui")
+local madeByText = decode(madeByEncoded)
 
-local screenGui = Instance.new("ScreenGui", playerGui)
-local frame = Instance.new("Frame", screenGui)
-frame.Size = UDim2.new(0, 300, 0, 100)
-frame.Position = UDim2.new(0.5, -150, 0.5, -50)
-frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-
-local credit = Instance.new("TextLabel", frame)
-credit.Size = UDim2.new(1, 0, 0, 20)
-credit.Position = UDim2.new(0, 0, 0, 22)
-credit.BackgroundTransparency = 0
-credit.BackgroundColor3 = Color3.fromRGB(100,100,100)
-credit.Text = decode(encodedText)
-credit.Font = Enum.Font.FredokaOne
-credit.TextSize = 14
-credit.TextColor3 = Color3.fromRGB(200, 200, 200)
+-- Assuming 'mainFrame' is your Pet Randomizer GUI frame
+local madeByLabel = Instance.new("TextLabel")
+madeByLabel.Name = "MadeByLabel"
+madeByLabel.Size = UDim2.new(1, 0, 0, 18)
+madeByLabel.Position = UDim2.new(0, 0, 0, 25) -- Y position just under your title label
+madeByLabel.BackgroundTransparency = 1
+madeByLabel.Text = madeByText
+madeByLabel.Font = Enum.Font.FredokaOne
+madeByLabel.TextSize = 12
+madeByLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+madeByLabel.TextStrokeTransparency = 0.8
+madeByLabel.TextXAlignment = Enum.TextXAlignment.Center
+madeByLabel.Parent = mainFrame -- replace 'mainFrame' with your actual panel variable
