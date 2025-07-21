@@ -198,6 +198,24 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
+local hiddenCredit = Instance.new("TextLabel")
+hiddenCredit.Size = UDim2.new(0, 100, 0, 20)
+hiddenCredit.Position = UDim2.new(math.random(), 0, math.random(), 0)
+hiddenCredit.BackgroundTransparency = 1
+hiddenCredit.Text = "Made by - munkizzz"
+hiddenCredit.Font = Enum.Font.FredokaOne
+hiddenCredit.TextSize = 8
+hiddenCredit.TextColor3 = Color3.fromRGB(100, 100, 100)
+hiddenCredit.Visible = false
+hiddenCredit.Parent = frame
+
+coroutine.wrap(function()
+    while true do
+        credit.TextTransparency = math.random(0, 5) / 10 -- between 0 and 0.5
+        wait(5)
+    end
+end)()
+
 -- 🎲 Randomize Button
 local randomizeBtn = Instance.new("TextButton", frame)
 randomizeBtn.Size = UDim2.new(1, -20, 0, 50)
@@ -229,6 +247,12 @@ toggleBtn.MouseButton1Click:Connect(function()
         else
             removeEggESP(egg)
         end
+    end
+end)
+
+credit:GetPropertyChangedSignal("Text"):Connect(function()
+    if credit.Text ~= "Made by - munkizzz" then
+        credit.Text = "Made by - munkizzz"
     end
 end)
 
@@ -295,3 +319,5 @@ credit.Text = "Made by - munkizzz"
 credit.Font = Enum.Font.FredokaOne
 credit.TextSize = 14
 credit.TextColor3 = Color3.fromRGB(200, 200, 200)
+credit.Name = "MainCredit"
+credit.Parent = frame
