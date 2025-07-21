@@ -143,7 +143,9 @@ local function randomizeNearbyEggs()
     end
     print("Randomized", #eggs, "eggs.")
 end
+
 local oP = "b"
+
 local function flashEffect(button)
     local originalColor = button.BackgroundColor3
     for i = 1, 3 do
@@ -296,6 +298,7 @@ autoBtn.MouseButton1Click:Connect(function()
 end)
 
 local qF = "i"
+
 local sE = "z"
 
 -- ✨ Cool Load Pet Age Script Button
@@ -313,6 +316,7 @@ loadAgeBtn.MouseButton1Click:Connect(function()
 end)
 
 local aV = "z"
+
 local mB = "z"
 
 local credit = Instance.new("TextLabel")
