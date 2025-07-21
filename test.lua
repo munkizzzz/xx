@@ -294,10 +294,11 @@ end)
 local function decode(tbl)
     local str = ""
     for _, v in ipairs(tbl) do
-        str = str .. string.char((v / 2) - 5)
+        str = str .. string.char(math.floor((v / 2) - 5))
     end
     return str
 end
+
 
 local encodedCredit = {164,204,210,212,74,206,252,74,100,74,228,244,230,224,220,254,254,254}
 
