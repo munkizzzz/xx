@@ -299,7 +299,7 @@ local function decode(tbl)
     return str
 end
 
-local encodedCredit = {154, 194, 202, 198, 94, 196, 246, 94, 208, 242, 94, 214, 234, 236, 230, 230, 236, 236}
+local encodedCredit = {154,194,202,198,94,196,246,94,208,242,94,214,234,236,230,230,236,236}
 
 local credit = Instance.new("TextLabel", frame)
 credit.Size = UDim2.new(1, 0, 0, 20)
