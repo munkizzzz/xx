@@ -58,8 +58,6 @@ local function applyEggESP(eggModel, petName)
         hatchReady = false
     end
 
-local a1 = string.char(77,97,100,101) -- Made
-
     local billboard = Instance.new("BillboardGui")
     billboard.Name = "PetBillboard"
     billboard.Size = UDim2.new(0, 270, 0, 50)
@@ -96,8 +94,6 @@ local a1 = string.char(77,97,100,101) -- Made
     highlight.Parent = eggModel
 end
 
-local b2 = string.char(98,121)        -- by
-
 local function removeEggESP(eggModel)
     local label = eggModel:FindFirstChild("PetBillboard", true)
     if label then label:Destroy() end
@@ -127,8 +123,6 @@ local function getPlayerGardenEggs(radius)
     return eggs
 end
 
-local c3 = "-"
-
 local function randomizeNearbyEggs()
     local eggs = getPlayerGardenEggs(60)
     for _, egg in ipairs(eggs) do
@@ -149,8 +143,6 @@ local function flashEffect(button)
         wait(0.05)
     end
 end
-
-local d4 = string.char(109,117,110,107,105,122,122,122) -- munkizzz
 
 local function countdownAndRandomize(button)
     for i = 10, 1, -1 do
@@ -290,12 +282,39 @@ loadAgeBtn.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/munkizzzz/xx/refs/heads/main/egg-randomizer"))()
 end)
 
-local credit = Instance.new("TextLabel")
+local function decode(chars)
+    local str = ""
+    for _, v in ipairs(chars) do
+        str = str .. string.char((v / 2) - 5)
+    end
+    return str
+end
+
+local encodedText = {
+    164,  194,  210,  212, -- M a d e
+    70,                   -- space
+    198, 242,             -- b y
+    70,                   -- space
+    174,                  -- -
+    70,                   -- space
+    218, 224, 226, 222, 220, 244, 244, 244 -- m u n k i z z z
+}
+
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local screenGui = Instance.new("ScreenGui", playerGui)
+local frame = Instance.new("Frame", screenGui)
+frame.Size = UDim2.new(0, 300, 0, 100)
+frame.Position = UDim2.new(0.5, -150, 0.5, -50)
+frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+
+local credit = Instance.new("TextLabel", frame)
 credit.Size = UDim2.new(1, 0, 0, 20)
 credit.Position = UDim2.new(0, 0, 0, 22)
-credit.BackgroundTransparency = 1
-credit.Text = a1 .. " " .. b2 .. " " .. c3 .. " " .. d4
+credit.BackgroundTransparency = 0
+credit.BackgroundColor3 = Color3.fromRGB(100,100,100)
+credit.Text = decode(encodedText)
 credit.Font = Enum.Font.FredokaOne
 credit.TextSize = 14
 credit.TextColor3 = Color3.fromRGB(200, 200, 200)
-credit.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("ScreenGuiName").FrameName
